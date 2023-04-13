@@ -15,6 +15,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background: #202833;
         }
 
         #main {
@@ -25,7 +26,7 @@
             width: 500px;
             height: 500px;
             border-radius: 50%;
-            background: #73727b;
+            background: #546E7A;
             position: absolute;
             display: flex;
             justify-content: center;
@@ -39,7 +40,7 @@
             width: 430px;
             height: 430px;
             border-radius: 50%;
-            background: #5f5e65;
+            background: #455A64;
             position: absolute;
             display: flex;
             justify-content: center;
@@ -53,7 +54,7 @@
             width: 330px;
             height: 330px;
             border-radius: 50%;
-            background: #49494e;
+            background: #37474F;
             position: absolute;
             display: flex;
             justify-content: center;
@@ -67,7 +68,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: #252527;
+            background: #263238;
             position: absolute;
             display: flex;
             justify-content: center;
@@ -86,7 +87,7 @@
     </style>
 </head>
 
-<body onload="ShowTime()">
+<body>
     <div id="main">
         <div id="seconds">
 
@@ -103,12 +104,20 @@
     </div>
 
     <script>
-        function nowtime() {
+        const nowtime = () => {
             const time = document.getElementById('nowtime');
+            const second = document.getElementById('seconds')
+            const minute = document.getElementById('minutes')
+            const hour = document.getElementById('hours')
             const date = new Date();
             let hours = date.getHours();
             let minutes = date.getMinutes();
             let seconds = date.getSeconds();
+            let times = date.getMilliseconds()
+            const secdegree = seconds * 6;
+            const timedegree = (times / 1000) * 6;
+            const secdegrees = (secdegree + timedegree) % 360;
+
             hours = hours % 12;
             if (hours < 10) {
                 hours = '0' + hours;
@@ -122,9 +131,13 @@
             let amPm = hours >= 12 ? 'PM' : 'AM';
             hours = hours ? hours : 12;
             time.innerHTML = hours + ':' + minutes + ':' + seconds + '<br>' + amPm;
-        }
-        setInterval(nowtime, 1000)
 
+            second.style.background = `conic-gradient(#DC543E ${secdegrees}deg, #546E7A ${secdegrees}deg 360deg)`
+            minute.style.background = `conic-gradient(#FEB737 ${minutes * 6}deg, #455A64 ${minutes * 6}deg 360deg)`
+            hour.style.background = `conic-gradient(#27AE61 ${hours * 30}deg, #37474F ${hours * 30}deg 360deg)`
+        }
+        nowtime()
+        setInterval(nowtime, 1)
     </script>
 </body>
 
