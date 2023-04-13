@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #main {
+            position: relative;
+        }
+
+        #seconds {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: #73727b;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #minutes {
+            width: 430px;
+            height: 430px;
+            border-radius: 50%;
+            background: #5f5e65;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #hours {
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            background: #49494e;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #times {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: #252527;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'Righteous', cursive;
+            font-size: 32px;
+        }
+
+        #nowtime {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body onload="ShowTime()">
+    <div id="main">
+        <div id="seconds">
+
+        </div>
+        <div id="minutes">
+
+        </div>
+        <div id="hours">
+
+        </div>
+        <div id="times">
+            <span id="nowtime"></span>
+        </div>
+    </div>
+
+    <script>
+        function nowtime() {
+            const time = document.getElementById('nowtime');
+            const date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            hours = hours % 12;
+            if (hours < 10) {
+                hours = '0' + hours;
+            }
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+            let amPm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours ? hours : 12;
+            time.innerHTML = hours + ':' + minutes + ':' + seconds + '<br>' + amPm;
+        }
+        setInterval(nowtime, 1000)
+
+    </script>
+</body>
+
+</html>
